@@ -1,0 +1,33 @@
+conta_ponto/
+    ├── src/
+    │   ├── widget/
+    │   │   ├── __init__.py
+    │   │   ├── button.py
+    │   │   ├── textBox.py
+    │   │   ├── scrollbars.py
+    │   ├── model/
+    │   │   ├── __pychache__/
+    │   │   ├── coincident.py
+    │   │   ├── data_processing.py
+    │   │   ├── gauge_chart.py
+    │   ├── utils/
+    │   │   ├── __pychache__/
+    │   │   ├── utils.py
+    │   │   ├── consult.py
+    ├── conta_ponto.db
+    ├── GerenciamentoPostal.spec
+    ├── main.py
+    ├── tabela_resultados.html
+    ├── temp_chart.html
+
+
+# cria o arquivo requirements.txt
+pip freeze > requirements.txt   
+# cria um ambiente virtual
+ python3 -m venv venv         
+#instala o requirements
+pip install -r requirements.txt 
+# Atualiza o pip
+pip install --upgrade pip    
+# Atualiza todos os pacotes
+pip freeze | xargs -n1 pip install -U          /home/anderson/ANDERSON/Projects/conta_ponto/venv/lib/python3.10/site-packages/pyecharts

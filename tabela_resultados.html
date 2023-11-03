@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Awesome-pyecharts</title>
+    
+    
+
+<style>
+    /* Estilização para os gráficos */
+    .chart-container {
+        border: 2px solid #000;
+        margin: 10px; /* Adicione margem para espaçamento externo */
+        text-align: center;  /* Centraliza o texto */
+    }
+
+    .title {
+        font-size: 16px;
+        padding-top: 10px;
+    }
+</style>
+</head>
+<body >
+            <style>
+        .tab {
+            overflow: hidden;
+            border: 1px solid #ccc;
+            background-color: #f1f1f1;
+        }
+
+        .tab button {
+            background-color: inherit;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 12px 16px;
+            transition: 0.3s;
+        }
+
+        .tab button:hover {
+            background-color: #ddd;
+        }
+
+        .tab button.active {
+            background-color: #ccc;
+        }
+
+        .chart-container {
+            display: block;
+        }
+
+        .chart-container:nth-child(n+2) {
+            display: none;
+        }
+    </style>
+    <div class="tab">
+            <button class="tablinks" onclick="showChart(event, '2f22f58c77e14dba913a65b75882c065')">Tabela de Resultados</button>
+    </div>
+
+    <div class="box">
+                        <style>
+            .fl-table {
+                margin: 20px;
+                border-radius: 5px;
+                font-size: 12px;
+                border: none;
+                border-collapse: collapse;
+                max-width: 100%;
+                white-space: nowrap;
+                word-break: keep-all;
+            }
+
+            .fl-table th {
+                text-align: left;
+                font-size: 20px;
+            }
+
+            .fl-table tr {
+                display: table-row;
+                vertical-align: inherit;
+                border-color: inherit;
+            }
+
+            .fl-table tr:hover td {
+                background: #00d1b2;
+                color: #F8F8F8;
+            }
+
+            .fl-table td, .fl-table th {
+                border-style: none;
+                border-top: 1px solid #dbdbdb;
+                border-left: 1px solid #dbdbdb;
+                border-bottom: 3px solid #dbdbdb;
+                border-right: 1px solid #dbdbdb;
+                padding: .5em .55em;
+                font-size: 15px;
+            }
+
+            .fl-table td {
+                border-style: none;
+                font-size: 15px;
+                vertical-align: center;
+                border-bottom: 1px solid #dbdbdb;
+                border-left: 1px solid #dbdbdb;
+                border-right: 1px solid #dbdbdb;
+                height: 30px;
+            }
+
+            .fl-table tr:nth-child(even) {
+                background: #F8F8F8;
+            }
+        </style>
+        <div id="2f22f58c77e14dba913a65b75882c065" class="chart-container" style="">
+            <p class="title" > </p>
+            <p class="subtitle" > </p>
+            <table class="fl-table">
+    <thead>
+        <tr>
+            <th>Endereço Duplicado</th>
+            <th>Códigos do Objeto</th>
+            <th>Distritos</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>rua dorival antonio bergamo 177</td>
+            <td>[&#x27;OV209467056BR&#x27;, &#x27;YC729766322BR&#x27;]</td>
+            <td>[&#x27;303&#x27;, &#x27;604 B&#x27;]</td>
+        </tr>
+        <tr>
+            <td>rua josé zola 133</td>
+            <td>[&#x27;NB400689820BR&#x27;, &#x27;NB381158676BR&#x27;, &#x27;YA183619843BR&#x27;]</td>
+            <td>[&#x27;306 A&#x27;, &#x27;307 A&#x27;, &#x27;606 B&#x27;]</td>
+        </tr>
+        <tr>
+            <td>rua thereza gandini bolla 405</td>
+            <td>[&#x27;OV494923395BR&#x27;, &#x27;YC729937530BR&#x27;]</td>
+            <td>[&#x27;604 A&#x27;, &#x27;604 B&#x27;]</td>
+        </tr>
+        <tr>
+            <td>avenida octorino maestro 120</td>
+            <td>[&#x27;YB125042517BR&#x27;, &#x27;YC743694462BR&#x27;]</td>
+            <td>[&#x27;604 B&#x27;, &#x27;606 B&#x27;]</td>
+        </tr>
+    </tbody>
+</table>
+        </div>
+
+    </div>
+
+    <script>
+    </script>
+    <script>
+        (function() {
+            containers = document.getElementsByClassName("chart-container");
+            if(containers.length > 0) {
+                containers[0].style.display = "block";
+            }
+        })()
+
+        function showChart(evt, chartID) {
+            let containers = document.getElementsByClassName("chart-container");
+            for (let i = 0; i < containers.length; i++) {
+                containers[i].style.display = "none";
+            }
+
+            let tablinks = document.getElementsByClassName("tablinks");
+            for (let i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = "tablinks";
+            }
+
+            document.getElementById(chartID).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+    </script>
+</body>
+</html>
