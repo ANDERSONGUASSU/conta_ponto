@@ -65,45 +65,48 @@ def encontrar_duplicados():
         data = get_data_from_table(table_name, cursor)
         data_list.append((format_table_name(table_name), data))
 
-    # Classificar a lista de tuplas com base no critério desejado
-    sorted_data_list = sorted(
-        data_list,
-        key=lambda x: (x[0].split()[1] if len(x[0].split()) > 1 else '',
-                       int(x[0].split()[0]) if len(x[0].split()) > 0 else 0))
-
     # Dicionário para armazenar endereços duplicados
     enderecos_duplicados = {}
 
-    resultados = []  # Lista para armazenar os resultados a serem retornados
-
-    for distrito, data in sorted_data_list:
+    for distrito, data in data_list:
         for codigo_objeto, endereco in data:
             # Remove espaços e converte o endereço para letras minúsculas
-            endereco_limpo = endereco.strip().lower()
+            endereco_limpo = endereco.strip().upper()
 
             if endereco_limpo in enderecos_duplicados:
-                distritos_anteriores = [
-                    dist for _, dist in enderecos_duplicados[endereco_limpo]]
-                if distrito not in distritos_anteriores:
-                    enderecos_duplicados[
-                        endereco_limpo].append((codigo_objeto, distrito))
+                enderecos_duplicados[
+                    endereco_limpo].append((codigo_objeto, distrito))
             else:
                 # Crie uma nova entrada no dicionário de endereços duplicados
                 enderecos_duplicados[
                     endereco_limpo] = [(codigo_objeto, distrito)]
 
-    # Agora, você pode armazenar os resultados em vez de imprimir
+    resultados = []  # Lista para armazenar os resultados a serem retornados
+
     for endereco, duplicados in enderecos_duplicados.items():
         if len(duplicados) > 1:
-            resultado_endereco = {
-                'Endereço Duplicado': endereco,
-                'Códigos do Objeto': [
-                    codigo_objeto for codigo_objeto, _ in duplicados],
-                'Distritos': [distrito for _, distrito in duplicados]
-            }
-            resultados.append(resultado_endereco)
-    disconnect_from_database(conn)
+            distritos = {}
+            for codigo_objeto, distrito in duplicados:
+                if distrito not in distritos:
+                    distritos[
+                        distrito] = {'Códigos do Objeto': [codigo_objeto]}
+                else:
+                    distritos[
+                        distrito]['Códigos do Objeto'].append(codigo_objeto)
 
+            if len(distritos) > 1:
+                resultado_endereco = {
+                    'Endereço Duplicado': endereco,
+                    **{f'Distrito{i+1}': [
+                        distrito] for i, distrito in enumerate(distritos)},
+                    **{f'Códigos do Objeto do Distrito{i+1}': data[
+                        'Códigos do Objeto'] for i, data in enumerate(
+                            distritos.values())}
+                }
+                print(resultado_endereco)
+                resultados.append(resultado_endereco)
+
+    disconnect_from_database(conn)
     return resultados
 
 

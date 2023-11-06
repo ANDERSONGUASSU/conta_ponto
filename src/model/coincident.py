@@ -5,27 +5,35 @@ import pandas as pd
 from src.utils.consult import encontrar_duplicados
 from src.utils.utils import open_in_browser
 
-resultados = encontrar_duplicados()
 
 css_styles = """
 <style>
-    /* Estilização para os gráficos */
-    .chart-container {
-        border: 2px solid #000;
-        margin: 10px; /* Adicione margem para espaçamento externo */
-        text-align: center;  /* Centraliza o texto */
-    }
+        table {
+            table-layout: fixed;
+            width: 100%;
+        }
 
-    .title {
-        font-size: 16px;
-        padding-top: 10px;
-    }
+        td {
+            max-width: 150px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: normal;
+        }
 </style>
 """
 
 
-def criar_tabela_resultados(resultados):
+def criar_e_exibir_tabela_resultados():
+    resultados = encontrar_duplicados()
     df = pd.DataFrame(resultados)
+
+    def formatar_valor(valor):
+        if isinstance(valor, list):
+            return ', '.join(valor)
+        else:
+            return valor
+    df = df.applymap(formatar_valor)
+    df = df.sort_values(by='Distrito1', ascending=False)
 
     table = Table()
 
@@ -38,7 +46,6 @@ def criar_tabela_resultados(resultados):
     table.set_global_opts(
         opts.TitleOpts(
             is_show=True,
-
         )
     )
 
@@ -46,13 +53,6 @@ def criar_tabela_resultados(resultados):
     tab = Tab()
     tab.add(table, "Tabela de Resultados")
 
-    return tab
-
-
-def exibir_tabela_resultados(resultados):
-
-    tabela = criar_tabela_resultados(resultados)
-
-    tabela.render("tabela_resultados.html")
+    tab.render("tabela_resultados.html")
 
     open_in_browser("tabela_resultados.html", css_styles)

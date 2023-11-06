@@ -1,11 +1,8 @@
 import tkinter as tk
 import customtkinter as ctk  # type: ignore
-from src.model.coincident import exibir_tabela_resultados
+from src.model.coincident import criar_e_exibir_tabela_resultados
 from src.model.data_processing import processing_district_data
 from src.model.gauge_chart import GaugeChart
-from src.utils.consult import encontrar_duplicados
-
-resultados = encontrar_duplicados()
 
 
 class ButtonManager:
@@ -38,4 +35,4 @@ class ButtonManager:
         self.gauge_chart.create_chart()
 
     def button_coincidentes(self):
-        exibir_tabela_resultados(resultados)
+        criar_e_exibir_tabela_resultados()

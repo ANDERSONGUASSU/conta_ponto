@@ -43,15 +43,21 @@ fn_qnt = """
 
 
 def new_label_opts_object():
-    return opts.LabelOpts(formatter=JsCode(fn_object), position="center")
+    return opts.LabelOpts(
+        formatter=JsCode(fn_object),
+        position="center", font_size=16, font_weight="bold")
 
 
 def new_label_opts_ar():
-    return opts.LabelOpts(formatter=JsCode(fn_ar), position="center")
+    return opts.LabelOpts(
+        formatter=JsCode(fn_ar),
+        position="center", font_size=16, font_weight="bold")
 
 
 def new_label_opts_qnt():
-    return opts.LabelOpts(formatter=JsCode(fn_qnt), position="center")
+    return opts.LabelOpts(
+        formatter=JsCode(fn_qnt),
+        position="center", font_size=16, font_weight="bold")
 
 
 class GaugeChart:
@@ -151,7 +157,7 @@ class GaugeChart:
                 [(category, value)],
                 radius=["20%", "30%"],
                 center=["15%", "25%"],
-                label_opts=new_label_opts_object(),
+                label_opts=new_label_opts_object()
             )
             .set_global_opts(
                 title_opts=opts.TitleOpts(is_show=False),

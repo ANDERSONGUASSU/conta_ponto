@@ -1,5 +1,5 @@
 import tkinter as tk
-import customtkinter as ctk
+import customtkinter as ctk  # type: ignore
 from src.widget.textBox import textBox
 from src.widget.button import ButtonManager
 

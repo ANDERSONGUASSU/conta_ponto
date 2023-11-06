@@ -7,17 +7,17 @@
     
 
 <style>
-    /* Estilização para os gráficos */
-    .chart-container {
-        border: 2px solid #000;
-        margin: 10px; /* Adicione margem para espaçamento externo */
-        text-align: center;  /* Centraliza o texto */
-    }
+        table {
+            table-layout: fixed;
+            width: 100%;
+        }
 
-    .title {
-        font-size: 16px;
-        padding-top: 10px;
-    }
+        td {
+            max-width: 150px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: normal;
+        }
 </style>
 </head>
 <body >
@@ -55,7 +55,7 @@
         }
     </style>
     <div class="tab">
-            <button class="tablinks" onclick="showChart(event, '2f22f58c77e14dba913a65b75882c065')">Tabela de Resultados</button>
+            <button class="tablinks" onclick="showChart(event, 'a204cc9e139840d6b799289a2b07147c')">Tabela de Resultados</button>
     </div>
 
     <div class="box">
@@ -111,37 +111,75 @@
                 background: #F8F8F8;
             }
         </style>
-        <div id="2f22f58c77e14dba913a65b75882c065" class="chart-container" style="">
+        <div id="a204cc9e139840d6b799289a2b07147c" class="chart-container" style="">
             <p class="title" > </p>
             <p class="subtitle" > </p>
             <table class="fl-table">
     <thead>
         <tr>
             <th>Endereço Duplicado</th>
-            <th>Códigos do Objeto</th>
-            <th>Distritos</th>
+            <th>Distrito1</th>
+            <th>Distrito2</th>
+            <th>Códigos do Objeto do Distrito1</th>
+            <th>Códigos do Objeto do Distrito2</th>
+            <th>Distrito3</th>
+            <th>Códigos do Objeto do Distrito3</th>
         </tr>
     </thead>
     <tbody>
         <tr>
-            <td>rua dorival antonio bergamo 177</td>
-            <td>[&#x27;OV209467056BR&#x27;, &#x27;YC729766322BR&#x27;]</td>
-            <td>[&#x27;303&#x27;, &#x27;604 B&#x27;]</td>
+            <td>RUA JOSÉ ZOLA 133</td>
+            <td>606 B</td>
+            <td>307 A</td>
+            <td>YA183619843BR</td>
+            <td>NB381158676BR</td>
+            <td>306 A</td>
+            <td>NB400689820BR, OV946037845BR</td>
         </tr>
         <tr>
-            <td>rua josé zola 133</td>
-            <td>[&#x27;NB400689820BR&#x27;, &#x27;NB381158676BR&#x27;, &#x27;YA183619843BR&#x27;]</td>
-            <td>[&#x27;306 A&#x27;, &#x27;307 A&#x27;, &#x27;606 B&#x27;]</td>
+            <td>AVENIDA OCTORINO MAESTRO 120</td>
+            <td>606 B</td>
+            <td>604 B</td>
+            <td>YC743694462BR</td>
+            <td>YB125042517BR</td>
+            <td>nan</td>
+            <td>nan</td>
         </tr>
         <tr>
-            <td>rua thereza gandini bolla 405</td>
-            <td>[&#x27;OV494923395BR&#x27;, &#x27;YC729937530BR&#x27;]</td>
-            <td>[&#x27;604 A&#x27;, &#x27;604 B&#x27;]</td>
+            <td>RUA DORIVAL ANTONIO BERGAMO 177</td>
+            <td>604 B</td>
+            <td>303</td>
+            <td>YC729766322BR</td>
+            <td>OV209467056BR</td>
+            <td>nan</td>
+            <td>nan</td>
         </tr>
         <tr>
-            <td>avenida octorino maestro 120</td>
-            <td>[&#x27;YB125042517BR&#x27;, &#x27;YC743694462BR&#x27;]</td>
-            <td>[&#x27;604 B&#x27;, &#x27;606 B&#x27;]</td>
+            <td>RUA THEREZA GANDINI BOLLA 405</td>
+            <td>604 A</td>
+            <td>604 B</td>
+            <td>OV494923395BR</td>
+            <td>YC729937530BR, BH930277295BR, YC729899567BR</td>
+            <td>nan</td>
+            <td>nan</td>
+        </tr>
+        <tr>
+            <td>RUA VIRGINIA MANTOVANI VITORIO 87</td>
+            <td>307 A</td>
+            <td>303</td>
+            <td>NB369698134BR</td>
+            <td>TG869467735BR</td>
+            <td>nan</td>
+            <td>nan</td>
+        </tr>
+        <tr>
+            <td>RUA SALVADOR DE TOLEDO 985</td>
+            <td>303</td>
+            <td>306 A</td>
+            <td>TF815462862BR</td>
+            <td>OV642432913BR</td>
+            <td>nan</td>
+            <td>nan</td>
         </tr>
     </tbody>
 </table>
