@@ -4,6 +4,8 @@ from pyecharts.commons.utils import JsCode   # type: ignore
 from src.utils.utils import open_in_browser
 from src.utils.consult import main, get_data_district_dict, connect_to_database, disconnect_from_database # NOQA
 
+title = """Conta Ponto"""
+
 css_styles = """
 <style>
     /* Estilização para os gráficos */
@@ -117,7 +119,7 @@ class GaugeChart:
         chart_path = "temp_chart.html"
         page.render(chart_path)
 
-        open_in_browser(chart_path, css_styles)
+        open_in_browser(chart_path, css_styles, title)
 
     def create_gauge(self, title, quantidade, qnt_objetos, ar):
         gauge = (

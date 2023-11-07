@@ -103,7 +103,7 @@ def encontrar_duplicados():
                         'Códigos do Objeto'] for i, data in enumerate(
                             distritos.values())}
                 }
-                print(resultado_endereco)
+                
                 resultados.append(resultado_endereco)
 
     disconnect_from_database(conn)

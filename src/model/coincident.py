@@ -5,6 +5,8 @@ import pandas as pd
 from src.utils.consult import encontrar_duplicados
 from src.utils.utils import open_in_browser
 
+title = """Pontos Coincidentes</title>"""
+
 
 css_styles = """
 <style>
@@ -55,4 +57,4 @@ def criar_e_exibir_tabela_resultados():
 
     tab.render("tabela_resultados.html")
 
-    open_in_browser("tabela_resultados.html", css_styles)
+    open_in_browser("tabela_resultados.html", css_styles, title)
