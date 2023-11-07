@@ -30,4 +30,6 @@ pip install -r requirements.txt
 # Atualiza o pip
 pip install --upgrade pip    
 # Atualiza todos os pacotes
-pip freeze | xargs -n1 pip install -U          /home/anderson/ANDERSON/Projects/conta_ponto/venv/lib/python3.10/site-packages/pyecharts
+pip freeze | xargs -n1 pip install -U          
+
+pyinstaller -w --onedir -n GerenciamentoPostal --icon correio.ico main.py --add-data "C:/Users/<user_name>/AppData/Local/Programs/Python/Python310/Lib/site-packages/customtkinter;customtkinter" --add-data "/home/anderson/ANDERSON/Projects/conta_ponto/venv/lib/python3.10/site-packages/pyecharts;pyecharts"
