@@ -114,12 +114,20 @@ class GaugeChart:
 
             page.add(grid)
 
-        disconnect_from_database(conn)
-
         chart_path = "temp_chart.html"
-        page.render(chart_path)
+        js_path = "./src/js/echarts.min.js"  # Substitua pelo caminho real
 
+        # Renderize o HTML e substitua o caminho para o echarts.min.js
+        page.render(chart_path)
+        with open(chart_path, "r") as f:
+            html_content = f.read()
+        html_content = html_content.replace("https://assets.pyecharts.org/assets/v5/echarts.min.js", js_path)
+        with open(chart_path, "w") as f:
+            f.write(html_content)
+
+        # Abra o arquivo no navegador
         open_in_browser(chart_path, css_styles, title)
+        disconnect_from_database(conn)
 
     def create_gauge(self, title, quantidade, qnt_objetos, ar):
         gauge = (

@@ -34,7 +34,7 @@ def criar_e_exibir_tabela_resultados():
             return ', '.join(valor)
         else:
             return valor
-    df = df.applymap(formatar_valor)
+    df = df.map(formatar_valor)
     df = df.sort_values(by='Distrito1', ascending=False)
 
     table = Table()
