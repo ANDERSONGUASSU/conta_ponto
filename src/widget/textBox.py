@@ -1,5 +1,5 @@
 import tkinter as tk
-import customtkinter as ctk
+import customtkinter as ctk  # type: ignore
 
 
 class textBox:

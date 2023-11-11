@@ -31,7 +31,7 @@ def format_table_name(table_name):
         if table_name[i].isdigit() and (
             i + 1 < len(table_name) and not table_name[i + 1].isdigit()
         ):   # NOQA
-            table_name = table_name[: i + 1] + ' ' + table_name[i + 1 :]
+            table_name = table_name[: i + 1] + ' ' + table_name[i + 1:]
     return table_name
 
 

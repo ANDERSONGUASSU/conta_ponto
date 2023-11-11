@@ -95,12 +95,12 @@ def processing_district_data(data, data1):
         table_name = sanitize_table_name(key)
 
         cursor.execute(
-            f'CREATE TABLE IF NOT EXISTS {table_name} (objeto TEXT,endereco TEXT)'
-        )   # noqa
+            f'CREATE TABLE IF NOT EXISTS {table_name} (objeto TEXT,endereco TEXT)' # noqa
+        )
 
         for value in values:
             cursor.execute(
                 f'INSERT INTO {table_name} (objeto, endereco) VALUES (?, ?)',
                 (value[0], value[1]),
-            )   # noqa
+            )
     conn.commit()
