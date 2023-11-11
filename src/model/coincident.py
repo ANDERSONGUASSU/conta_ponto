@@ -34,15 +34,13 @@ def criar_e_exibir_tabela_resultados():
             return ', '.join(valor)
         else:
             return valor
+
     df = df.map(formatar_valor)
     df = df.sort_values(by='Distrito1', ascending=False)
 
     table = Table()
 
-    table.add(
-        headers=list(df.columns),
-        rows=df.values.tolist()
-    )
+    table.add(headers=list(df.columns), rows=df.values.tolist())
 
     # Defina as opções da tabela, como largura, altura, etc.
     table.set_global_opts(
@@ -53,8 +51,8 @@ def criar_e_exibir_tabela_resultados():
 
     # Crie um objeto Tab e adicione a tabela a ele
     tab = Tab()
-    tab.add(table, "Tabela de Resultados")
+    tab.add(table, 'Tabela de Resultados')
 
-    tab.render("tabela_resultados.html")
+    tab.render('tabela_resultados.html')
 
-    open_in_browser("tabela_resultados.html", css_styles, title)
+    open_in_browser('tabela_resultados.html', css_styles, title)

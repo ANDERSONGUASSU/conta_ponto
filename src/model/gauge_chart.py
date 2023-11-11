@@ -2,7 +2,12 @@ from pyecharts.charts import Gauge, Page, Pie, Grid   # type: ignore
 from pyecharts import options as opts   # type: ignore
 from pyecharts.commons.utils import JsCode   # type: ignore
 from src.utils.utils import open_in_browser
-from src.utils.consult import main, get_data_district_dict, connect_to_database, disconnect_from_database # NOQA
+from src.utils.consult import (
+    main,
+    get_data_district_dict,
+    connect_to_database,
+    disconnect_from_database,
+)   # NOQA
 
 title = """Conta Ponto"""
 
@@ -47,19 +52,28 @@ fn_qnt = """
 def new_label_opts_object():
     return opts.LabelOpts(
         formatter=JsCode(fn_object),
-        position="center", font_size=16, font_weight="bold")
+        position='center',
+        font_size=16,
+        font_weight='bold',
+    )
 
 
 def new_label_opts_ar():
     return opts.LabelOpts(
         formatter=JsCode(fn_ar),
-        position="center", font_size=16, font_weight="bold")
+        position='center',
+        font_size=16,
+        font_weight='bold',
+    )
 
 
 def new_label_opts_qnt():
     return opts.LabelOpts(
         formatter=JsCode(fn_qnt),
-        position="center", font_size=16, font_weight="bold")
+        position='center',
+        font_size=16,
+        font_weight='bold',
+    )
 
 
 class GaugeChart:
@@ -83,46 +97,68 @@ class GaugeChart:
             gauge = self.create_gauge(chave, quantidade, qnt_objetos, ar)
 
             # Criar gráfico Pie (donut) para "Qnt_Objetos"
-            pie_objetos = self.create_pie_object("Objetos", qnt_objetos)
+            pie_objetos = self.create_pie_object('Objetos', qnt_objetos)
 
             # Criar gráfico Pie (donut) para "AR"
-            pie_ar = self.create_pie_ar("AR", ar)
+            pie_ar = self.create_pie_ar('AR', ar)
 
             # Criar gráfico Pie (donut) para "Quantidade"
-            pie_quantidade = self.create_pie_qnt("Pontos", quantidade)
+            pie_quantidade = self.create_pie_qnt('Pontos', quantidade)
 
             # Posicionar os gráficos Pie em uma grade
             grid = (
                 Grid()
-                .add(pie_objetos,
-                     grid_opts=opts.GridOpts(
-                         pos_left="10%", pos_top="10%",
-                         width="25%", height="25%"))
-                .add(pie_ar,
-                     grid_opts=opts.GridOpts(
-                         pos_left="40%", pos_top="10%",
-                         width="25%", height="25%"))
-                .add(pie_quantidade,
-                     grid_opts=opts.GridOpts(
-                         pos_left="70%", pos_top="10%",
-                         width="25%", height="25%"))
-                .add(gauge,
-                     grid_opts=opts.GridOpts(
-                         pos_left="70%", pos_top="10%",
-                         width="25%", height="25%"))
+                .add(
+                    pie_objetos,
+                    grid_opts=opts.GridOpts(
+                        pos_left='10%',
+                        pos_top='10%',
+                        width='25%',
+                        height='25%',
+                    ),
+                )
+                .add(
+                    pie_ar,
+                    grid_opts=opts.GridOpts(
+                        pos_left='40%',
+                        pos_top='10%',
+                        width='25%',
+                        height='25%',
+                    ),
+                )
+                .add(
+                    pie_quantidade,
+                    grid_opts=opts.GridOpts(
+                        pos_left='70%',
+                        pos_top='10%',
+                        width='25%',
+                        height='25%',
+                    ),
+                )
+                .add(
+                    gauge,
+                    grid_opts=opts.GridOpts(
+                        pos_left='70%',
+                        pos_top='10%',
+                        width='25%',
+                        height='25%',
+                    ),
+                )
             )
 
             page.add(grid)
 
-        chart_path = "temp_chart.html"
-        js_path = "./src/js/echarts.min.js"  # Substitua pelo caminho real
+        chart_path = 'temp_chart.html'
+        js_path = './src/js/echarts.min.js'  # Substitua pelo caminho real
 
         # Renderize o HTML e substitua o caminho para o echarts.min.js
         page.render(chart_path)
-        with open(chart_path, "r") as f:
+        with open(chart_path, 'r') as f:
             html_content = f.read()
-        html_content = html_content.replace("https://assets.pyecharts.org/assets/v5/echarts.min.js", js_path)
-        with open(chart_path, "w") as f:
+        html_content = html_content.replace(
+            'https://assets.pyecharts.org/assets/v5/echarts.min.js', js_path
+        )
+        with open(chart_path, 'w') as f:
             f.write(html_content)
 
         # Abra o arquivo no navegador
@@ -133,27 +169,27 @@ class GaugeChart:
         gauge = (
             Gauge()
             .add(
-                "",
+                '',
                 [((-120 + quantidade), quantidade)],
-                radius="50%",
-                center=["50%", "75%"],
+                radius='50%',
+                center=['50%', '75%'],
                 split_number=10,
                 min_=0,
                 max_=200,
                 axisline_opts=opts.AxisLineOpts(
                     linestyle_opts=opts.LineStyleOpts(
                         color=[
-                            (0.5, "#37a2da"),
-                            (0.6, "#47B23B"),
-                            (1, "#fd666d"),
+                            (0.5, '#37a2da'),
+                            (0.6, '#47B23B'),
+                            (1, '#fd666d'),
                         ],
-                        width=10
+                        width=10,
                     )
                 ),
-                detail_label_opts=opts.LabelOpts(formatter="{value}"),
+                detail_label_opts=opts.LabelOpts(formatter='{value}'),
             )
             .set_global_opts(
-                title_opts=opts.TitleOpts(title=f"Distrito {title}"),
+                title_opts=opts.TitleOpts(title=f'Distrito {title}'),
                 legend_opts=opts.LegendOpts(is_show=False),
             )
         )
@@ -163,11 +199,11 @@ class GaugeChart:
         pie = (
             Pie()
             .add(
-                "",
+                '',
                 [(category, value)],
-                radius=["20%", "30%"],
-                center=["15%", "25%"],
-                label_opts=new_label_opts_object()
+                radius=['20%', '30%'],
+                center=['15%', '25%'],
+                label_opts=new_label_opts_object(),
             )
             .set_global_opts(
                 title_opts=opts.TitleOpts(is_show=False),
@@ -180,10 +216,10 @@ class GaugeChart:
         pie = (
             Pie()
             .add(
-                "",
+                '',
                 [(category, value)],
-                radius=["20%", "30%"],
-                center=["50%", "25%"],
+                radius=['20%', '30%'],
+                center=['50%', '25%'],
                 label_opts=new_label_opts_ar(),
             )
             .set_global_opts(
@@ -197,10 +233,10 @@ class GaugeChart:
         pie = (
             Pie()
             .add(
-                "",
+                '',
                 [(category, value)],
-                radius=["20%", "30%"],
-                center=["85%", "25%"],
+                radius=['20%', '30%'],
+                center=['85%', '25%'],
                 label_opts=new_label_opts_qnt(),
             )
             .set_global_opts(

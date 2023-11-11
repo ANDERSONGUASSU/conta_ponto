@@ -8,7 +8,7 @@ def vertical_scrollbar(master, target):
 
 
 def horizontal_scrollbar(master, target):
-    scrollbar_x = ctk.CTkScrollbar(master=master,
-                                   command=target.xview,
-                                   orientation="horizontal")
+    scrollbar_x = ctk.CTkScrollbar(
+        master=master, command=target.xview, orientation='horizontal'
+    )
     scrollbar_x.pack(side=tk.BOTTOM, fill=tk.X)

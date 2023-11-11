@@ -6,7 +6,6 @@ from src.model.gauge_chart import GaugeChart
 
 
 class ButtonManager:
-
     def __init__(self, textbox1, textbox2):
         self.textbox1 = textbox1
         self.textbox2 = textbox2
@@ -14,11 +13,11 @@ class ButtonManager:
 
     def create_button(self, master, name):
         button = ctk.CTkButton(master=master, text=name)
-        if name == "Salvar":
+        if name == 'Salvar':
             button.configure(command=self.button_function)
-        elif name == "Conta Ponto":
+        elif name == 'Conta Ponto':
             button.configure(command=self.button_point_account)
-        elif name == "Coincidentes":
+        elif name == 'Coincidentes':
             button.configure(command=self.button_coincidentes)
         button.pack(side=tk.BOTTOM, padx=10, pady=10)
 
@@ -28,8 +27,8 @@ class ButtonManager:
 
         processing_district_data(text1, text2)
 
-        self.textbox1.text_box.delete("1.0", tk.END)
-        self.textbox2.text_box.delete("1.0", tk.END)
+        self.textbox1.text_box.delete('1.0', tk.END)
+        self.textbox2.text_box.delete('1.0', tk.END)
 
     def button_point_account(self):
         self.gauge_chart.create_chart()

@@ -14,21 +14,24 @@ def disconnect_from_database(conn):
 def get_table_names(cursor):
     cursor.execute("SELECT name FROM sqlite_master WHERE type='table';")
     table_names = [
-        row[0] for row in cursor.fetchall() if row[0].startswith('tbl_')]
+        row[0] for row in cursor.fetchall() if row[0].startswith('tbl_')
+    ]
     return table_names
 
 
 def get_data_from_table(table_name, cursor):
-    cursor.execute(f"SELECT * FROM {table_name};")
+    cursor.execute(f'SELECT * FROM {table_name};')
     data = cursor.fetchall()
     return data
 
 
 def format_table_name(table_name):
-    table_name = table_name.replace("tbl_", "")
+    table_name = table_name.replace('tbl_', '')
     for i in range(len(table_name)):
-        if table_name[i].isdigit() and (i + 1 < len(table_name) and not table_name[i + 1].isdigit()): # NOQA
-            table_name = table_name[:i + 1] + ' ' + table_name[i + 1:]
+        if table_name[i].isdigit() and (
+            i + 1 < len(table_name) and not table_name[i + 1].isdigit()
+        ):   # NOQA
+            table_name = table_name[: i + 1] + ' ' + table_name[i + 1 :]
     return table_name
 
 
@@ -44,7 +47,7 @@ def get_unique_address_counts(sorted_data_list):
 
 
 def get_data_district_dict(cursor):
-    cursor.execute("SELECT Distrito, Qnt_Objetos, Ar FROM dados_distritos")
+    cursor.execute('SELECT Distrito, Qnt_Objetos, Ar FROM dados_distritos')
     results = cursor.fetchall()
     data_district_dict = {}
 
@@ -74,12 +77,14 @@ def encontrar_duplicados():
             endereco_limpo = endereco.strip().upper()
 
             if endereco_limpo in enderecos_duplicados:
-                enderecos_duplicados[
-                    endereco_limpo].append((codigo_objeto, distrito))
+                enderecos_duplicados[endereco_limpo].append(
+                    (codigo_objeto, distrito)
+                )
             else:
                 # Crie uma nova entrada no dicionário de endereços duplicados
-                enderecos_duplicados[
-                    endereco_limpo] = [(codigo_objeto, distrito)]
+                enderecos_duplicados[endereco_limpo] = [
+                    (codigo_objeto, distrito)
+                ]
 
     resultados = []  # Lista para armazenar os resultados a serem retornados
 
@@ -88,22 +93,29 @@ def encontrar_duplicados():
             distritos = {}
             for codigo_objeto, distrito in duplicados:
                 if distrito not in distritos:
-                    distritos[
-                        distrito] = {'Códigos do Objeto': [codigo_objeto]}
+                    distritos[distrito] = {
+                        'Códigos do Objeto': [codigo_objeto]
+                    }
                 else:
-                    distritos[
-                        distrito]['Códigos do Objeto'].append(codigo_objeto)
+                    distritos[distrito]['Códigos do Objeto'].append(
+                        codigo_objeto
+                    )
 
             if len(distritos) > 1:
                 resultado_endereco = {
                     'Endereço Duplicado': endereco,
-                    **{f'Distrito{i+1}': [
-                        distrito] for i, distrito in enumerate(distritos)},
-                    **{f'Códigos do Objeto do Distrito{i+1}': data[
-                        'Códigos do Objeto'] for i, data in enumerate(
-                            distritos.values())}
+                    **{
+                        f'Distrito{i+1}': [distrito]
+                        for i, distrito in enumerate(distritos)
+                    },
+                    **{
+                        f'Códigos do Objeto do Distrito{i+1}': data[
+                            'Códigos do Objeto'
+                        ]
+                        for i, data in enumerate(distritos.values())
+                    },
                 }
-                
+
                 resultados.append(resultado_endereco)
 
     disconnect_from_database(conn)
@@ -123,8 +135,11 @@ def main():
     # Classificar a lista de tuplas com base no critério desejado
     sorted_data_list = sorted(
         data_list,
-        key=lambda x: (x[0].split()[1] if len(x[0].split()) > 1 else '',
-                       int(x[0].split()[0]) if len(x[0].split()) > 0 else 0))
+        key=lambda x: (
+            x[0].split()[1] if len(x[0].split()) > 1 else '',
+            int(x[0].split()[0]) if len(x[0].split()) > 0 else 0,
+        ),
+    )
 
     contagem_enderecos_unicos = get_unique_address_counts(sorted_data_list)
     disconnect_from_database(conn)
@@ -132,5 +147,5 @@ def main():
     return contagem_enderecos_unicos
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
