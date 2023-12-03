@@ -27,6 +27,27 @@ css_styles = """
 
 def criar_e_exibir_tabela_resultados():
     resultados = encontrar_duplicados()
+
+    if not resultados:
+        mensagem_html = """
+        <html>
+        <head>
+            {css_styles}
+            <title>{title}</title>
+        </head>
+        <body>
+            <h1>Não há objetos duplicados</h1>
+        </body>
+        </html>
+        """.format(
+            css_styles=css_styles, title=title
+        )
+
+        with open('pontos_coincidentes.html', 'w') as f:
+            f.write(mensagem_html)
+        open_in_browser('pontos_coincidentes.html')
+        return
+
     df = pd.DataFrame(resultados)
 
     def formatar_valor(valor):
@@ -51,8 +72,8 @@ def criar_e_exibir_tabela_resultados():
 
     # Crie um objeto Tab e adicione a tabela a ele
     tab = Tab()
-    tab.add(table, 'Tabela de Resultados')
+    tab.add(table, 'Pontos Coincidentes')
 
-    tab.render('tabela_resultados.html')
+    tab.render('pontos_coincidentes.html')
 
-    open_in_browser('tabela_resultados.html', css_styles, title)
+    open_in_browser('pontos_coincidentes.html', css_styles, title)

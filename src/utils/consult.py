@@ -31,7 +31,7 @@ def format_table_name(table_name):
         if table_name[i].isdigit() and (
             i + 1 < len(table_name) and not table_name[i + 1].isdigit()
         ):   # NOQA
-            table_name = table_name[: i + 1] + ' ' + table_name[i + 1:]
+            table_name = table_name[: i + 1] + ' ' + table_name[i + 1 :]
     return table_name
 
 
@@ -102,23 +102,45 @@ def encontrar_duplicados():
                     )
 
             if len(distritos) > 1:
+                # Ordena os distritos com base na ordem numérica decrescente
+                distritos_ordenados = sorted(
+                    distritos.items(),
+                    key=lambda x: (
+                        int(''.join(filter(str.isdigit, x[0]))),
+                        x[0],
+                    ),
+                    reverse=True,
+                )
+
+                # Obtém o maior distrito e seus objetos
+                maior_distrito, dados_maior_distrito = distritos_ordenados[0]
+
+                # Cria o resultado com o maior distrito na posição Distrito1
                 resultado_endereco = {
                     'Endereço Duplicado': endereco,
+                    'Distrito1': [maior_distrito],
                     **{
-                        f'Distrito{i+1}': [distrito]
-                        for i, distrito in enumerate(distritos)
+                        f'Distrito{i+2}': [distrito]
+                        for i, (distrito, _) in enumerate(
+                            distritos_ordenados[1:]
+                        )
                     },
                     **{
                         f'Códigos do Objeto do Distrito{i+1}': data[
                             'Códigos do Objeto'
                         ]
-                        for i, data in enumerate(distritos.values())
+                        for i, data in enumerate(
+                            [dados_maior_distrito]
+                            + [
+                                distrito[1]
+                                for distrito in distritos_ordenados[1:]
+                            ]
+                        )
                     },
                 }
 
                 resultados.append(resultado_endereco)
 
-    disconnect_from_database(conn)
     return resultados
 
 

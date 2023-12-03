@@ -148,10 +148,9 @@ class GaugeChart:
 
             page.add(grid)
 
-        chart_path = 'temp_chart.html'
-        js_path = './src/js/echarts.min.js'  # Substitua pelo caminho real
+        chart_path = 'conta_ponto.html'
+        js_path = './src/js/echarts.min.js'
 
-        # Renderize o HTML e substitua o caminho para o echarts.min.js
         page.render(chart_path)
         with open(chart_path, 'r') as f:
             html_content = f.read()
@@ -167,8 +166,7 @@ class GaugeChart:
 
     def create_gauge(self, title, quantidade, qnt_objetos, ar):
         gauge = (
-            Gauge()
-            .add(
+            Gauge().add(
                 '',
                 [((-120 + quantidade), quantidade)],
                 radius='50%',
@@ -188,10 +186,30 @@ class GaugeChart:
                 ),
                 detail_label_opts=opts.LabelOpts(formatter='{value}'),
             )
-            .set_global_opts(
-                title_opts=opts.TitleOpts(title=f'Distrito {title}'),
-                legend_opts=opts.LegendOpts(is_show=False),
+            if title < '600'
+            else Gauge().add(
+                '',
+                [((-50 + quantidade), quantidade)],
+                radius='50%',
+                center=['50%', '75%'],
+                split_number=12,
+                min_=0,
+                max_=120,
+                axisline_opts=opts.AxisLineOpts(
+                    linestyle_opts=opts.LineStyleOpts(
+                        color=[
+                            (0.42, '#37a2da'),
+                            (0.5, '#47B23B'),
+                            (1, '#fd666d'),
+                        ],
+                        width=10,
+                    )
+                ),
+                detail_label_opts=opts.LabelOpts(formatter='{value}'),
             )
+        ).set_global_opts(
+            title_opts=opts.TitleOpts(title=f'Distrito {title}'),
+            legend_opts=opts.LegendOpts(is_show=False),
         )
         return gauge
 
